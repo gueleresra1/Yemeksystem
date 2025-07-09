@@ -20,7 +20,7 @@ def create_default_roles():
         roles = [
             Role(name="admin", description="Yönetici yetkisi"),
             Role(name="user", description="Normal kullanıcı"),
-            Role(name="moderator", description="Moderatör yetkisi")
+            Role(name="dealer", description="Bayi/Restorant yetkisi")
         ]
         
         for role in roles:
