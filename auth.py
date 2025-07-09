@@ -50,14 +50,14 @@ def verify_token(token: str):
     """Token'ı doğrula"""
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("sub")
-        if email is None:
+        user_id : str = payload.get("sub")
+        if user_id is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Token geçersiz",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-        return email
+        return int(user_id)
     except JWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -71,9 +71,9 @@ def get_current_user(
 ):
     """Mevcut kullanıcıyı al"""
     token = credentials.credentials
-    email = verify_token(token)
+    user_id = verify_token(token)
     
-    user = db.query(models.User).filter(models.User.email == email).first()
+    user = db.query(models.User).filter(models.User.id == user_id).first()
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
