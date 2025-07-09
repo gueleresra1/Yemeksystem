@@ -35,29 +35,28 @@ def sayGreeting():
 # 🔒 Protected endpoint example
 @app.get("/protected")
 def protected_route(current_user: models.User = Depends(auth.get_current_user)):
-    return {"message": f"Hello {current_user.username}, this is a protected route!"}
+    return {"message": f"Hello {current_user.email}, this is a protected route!"}
 
 # 👤 User Register Endpoint
 @app.post("/register", response_model=schemas.UserOut)
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    # E-posta veya kullanıcı adı zaten var mı?
+    # E-posta zaten var mı?
     existing_user = db.query(models.User).filter(
-        (models.User.username == user.username) | (models.User.email == user.email)
+        models.User.email == user.email
     ).first()
     if existing_user:
-        raise HTTPException(status_code=400, detail="Benutzername oder E-Mail bereits vorhanden.")
-
+        raise HTTPException(status_code=400, detail="E-Mail bereits vorhanden.")
+    
     # Yeni kullanıcı oluştur
     hashed_password = auth.get_password_hash(user.password)
     new_user = models.User(
-        username=user.username,
         email=user.email,
         password=hashed_password
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-
+    
     return new_user
 
 # 🔐 User Login Endpoint
@@ -70,12 +69,12 @@ def login_user(user_credentials: schemas.UserLogin, db: Session = Depends(get_db
             detail="Geçersiz email veya şifre",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+        
     access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = auth.create_access_token(
         data={"sub": str(user.id)}, expires_delta=access_token_expires
     )
-    
+        
     return {"access_token": access_token, "token_type": "bearer"}
 
 # 👤 Get Current User Endpoint

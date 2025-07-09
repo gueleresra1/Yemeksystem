@@ -1,11 +1,13 @@
 from pydantic import BaseModel, EmailStr
 
 class UserCreate(BaseModel):
+    username: str
     email: EmailStr
     password: str
 
 class UserOut(BaseModel):
     id: int
+    username: str
     email: EmailStr
 
     class Config:
@@ -20,4 +22,4 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    pass  # TokenData artık boş, gerekirse silebilirsiniz
+    username: str = None
