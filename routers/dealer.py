@@ -22,7 +22,7 @@ class DealerRegister(BaseModel):
 class DealerInfo(BaseModel):
     id: int
     email: str
-    role: str
+    role_id: str
     message: str
     
     class Config:
@@ -64,7 +64,7 @@ def dealer_register(
     new_dealer = User(
         email=dealer_data.email,
         password=hashed_password,
-        role_id=dealer_role.id
+        role_id=3
     )
     
     db.add(new_dealer)
@@ -74,6 +74,6 @@ def dealer_register(
     return DealerInfo(
         id=new_dealer.id,
         email=new_dealer.email,
-        role=new_dealer.role.name,
+        role_id=new_dealer.role_id,
         message=f"Dealer kaydı başarılı! Hoş geldin {new_dealer.email}"
     )

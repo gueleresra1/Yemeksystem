@@ -8,7 +8,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
-    role_id = Column(Integer, ForeignKey("roles.id"), nullable=True)
+    role_id = Column(Integer, ForeignKey("roles.id"), nullable=False)  # ← False yaptın mı?
     
     # Relationship
     role = relationship("Role", back_populates="users")
