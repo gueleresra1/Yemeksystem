@@ -45,7 +45,16 @@ def login_user(user_credentials: schemas.UserLogin, db: Session = Depends(get_db
         
     access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = auth.create_access_token(
-        data={"sub": str(user.id)}, expires_delta=access_token_expires
+        data={
+            "sub": str(user.id), 
+            "role_id": user.role_id,
+            "role": {
+                "id": user.role.id,
+                "name": user.role.name,
+                "description": user.role.description
+            } if user.role else None
+        }, 
+        expires_delta=access_token_expires
     )
         
     return {"access_token": access_token, "token_type": "bearer"}
