@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from models import User, Role
-from auth import get_password_hash
+from auth import get_password_hash, get_current_user
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/dealer", tags=["dealer"])
@@ -29,8 +29,19 @@ class DealerInfo(BaseModel):
         from_attributes = True
 
 @router.post("/register", response_model=DealerInfo)
-def dealer_register(dealer_data: DealerRegister, db: Session = Depends(get_db)):
-    """Yeni dealer/bayi kaydı"""
+def dealer_register(
+    dealer_data: DealerRegister, 
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Yeni dealer/bayi kaydı - Sadece role_id 1 olan kullanıcılar"""
+    
+    # Role kontrolü - sadece role_id 1 olan kullanıcılar
+    if current_user.role_id != 1:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Bu işlem için yetkiniz yok"
+        )
     
     # Email kontrolü
     existing_user = db.query(User).filter(User.email == dealer_data.email).first()
