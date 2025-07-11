@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from .base import Base
+from datetime import datetime  
 
 class Recipe(Base):
     __tablename__ = "recipes"
@@ -13,6 +14,9 @@ class Recipe(Base):
     quantity = Column(String, nullable=False)  # Miktar (200gr, 1 adet, 2 çay kaşığı)
     step_order = Column(Integer, nullable=False)  # Yapım sırası
     instruction = Column(Text, nullable=True)  # Talimat (opsiyonel) # Malzeme bazli alerjenler
+
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationship
     food = relationship("Food", back_populates="recipes")

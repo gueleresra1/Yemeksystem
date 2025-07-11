@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, Table, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, Table, UniqueConstraint, DateTime
 from sqlalchemy.orm import relationship
 from .base import Base
+from datetime import datetime
 
 # Many-to-Many association tables
 food_allergens = Table(
