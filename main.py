@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import models
 from database import engine
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, users, dealer
+from routers import auth, users, dealer, foods
 
 # Veritabanı tablolarını oluştur
 models.Base.metadata.create_all(bind=engine)
@@ -22,6 +22,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(dealer.router)
+app.include_router(foods.router)
 
 @app.get("/")
 def sayGreeting():
