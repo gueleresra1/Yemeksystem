@@ -24,8 +24,11 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('code', sa.String(), nullable=False),
     sa.Column('icon', sa.String(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+    
     op.create_index(op.f('ix_allergens_code'), 'allergens', ['code'], unique=True)
     op.create_index(op.f('ix_allergens_id'), 'allergens', ['id'], unique=False)
     op.create_table('roles',
