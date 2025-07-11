@@ -36,9 +36,6 @@ def create_food(
         description=food_data.description,
         price=food_data.price,
         category=food_data.category,
-        ingredients=food_data.ingredients,
-        allergens=food_data.allergens,
-        tags=food_data.tags,
         dealer_id=current_user.id,
         is_active=True
     )
@@ -130,9 +127,7 @@ def update_food(
     food.description = food_data.description
     food.price = food_data.price
     food.category = food_data.category
-    food.ingredients = food_data.ingredients
-    food.allergens = food_data.allergens
-    food.tags = food_data.tags
+ 
     
     # Eski reçeteleri sil
     db.query(Recipe).filter(Recipe.food_id == food_id).delete()

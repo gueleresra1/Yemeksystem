@@ -48,9 +48,6 @@ class FoodCreate(BaseModel):
     description: Optional[str] = None
     price: float
     category: str
-    ingredients: List[str]  # ["tavuk", "pirinç", "soğan"]
-    allergens: Optional[List[str]] = None  # ["gluten", "süt"]
-    tags: Optional[List[str]] = None  # ["vejetaryen", "baharatlı"]
     recipes: List[RecipeCreate]  # Reçete listesi
 
 class FoodOut(BaseModel):
@@ -59,9 +56,6 @@ class FoodOut(BaseModel):
     description: Optional[str] = None
     price: float
     category: str
-    ingredients: List[str]
-    allergens: Optional[List[str]] = None
-    tags: Optional[List[str]] = None
     dealer_id: int
     is_active: bool
     recipes: List[RecipeOut] = []
