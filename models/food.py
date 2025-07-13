@@ -20,7 +20,8 @@ class Food(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Relationship
+    # Relationships
     dealer = relationship("User", back_populates="foods")
     recipes = relationship("Recipe", back_populates="food", cascade="all, delete-orphan")
     allergens = relationship("Allergen", secondary="food_allergens", back_populates="foods")
+    translations = relationship("FoodTranslation", back_populates="food", cascade="all, delete-orphan")
