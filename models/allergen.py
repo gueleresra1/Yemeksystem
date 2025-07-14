@@ -24,7 +24,10 @@ class Allergen(Base):
     id = Column(Integer, primary_key=True, index=True)
     code = Column(String, unique=True, nullable=False, index=True)
     icon = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     
     # Relationships
     foods = relationship("Food", secondary=food_allergens, back_populates="allergens")
     recipes = relationship("Recipe", secondary=recipe_allergens, back_populates="allergens")
+    translations = relationship("AllergenTranslation", back_populates="allergen", cascade="all, delete-orphan")

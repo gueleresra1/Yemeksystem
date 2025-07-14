@@ -14,5 +14,6 @@ class Role(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # Relationship
+    # Relationships
     users = relationship("User", back_populates="role")
+    translations = relationship("RoleTranslation", back_populates="role", cascade="all, delete-orphan")

@@ -16,3 +16,6 @@ class Language(Base):
     
     # Relationships
     food_translations = relationship("FoodTranslation", back_populates="language")
+    recipe_translations = relationship("RecipeTranslation", back_populates="language")
+    allergen_translations = relationship("AllergenTranslation", back_populates="language")
+    role_translations = relationship("RoleTranslation", back_populates="language")
