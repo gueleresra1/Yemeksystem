@@ -4,7 +4,7 @@ from typing import List
 from database import SessionLocal
 from models import User, Food, Recipe
 from auth import get_current_user
-import schemas
+from dtos import FoodCreateDTO, FoodOutDTO
 
 router = APIRouter(prefix="/foods", tags=["foods"])
 
@@ -15,9 +15,9 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/create", response_model=schemas.FoodOut)
+@router.post("/create", response_model=FoodOutDTO)
 def create_food(
-    food_data: schemas.FoodCreate,
+    food_data: FoodCreateDTO,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -60,7 +60,7 @@ def create_food(
     
     return new_food
 
-@router.get("/", response_model=List[schemas.FoodOut])
+@router.get("/", response_model=List[FoodOutDTO])
 def get_foods(
     db: Session = Depends(get_db),
     category: str = None,
@@ -83,7 +83,7 @@ def get_foods(
     foods = query.all()
     return foods
 
-@router.get("/{food_id}", response_model=schemas.FoodOut)
+@router.get("/{food_id}", response_model=FoodOutDTO)
 def get_food(
     food_id: int,
     db: Session = Depends(get_db)
@@ -99,10 +99,10 @@ def get_food(
     
     return food
 
-@router.put("/{food_id}", response_model=schemas.FoodOut)
+@router.put("/{food_id}", response_model=FoodOutDTO)
 def update_food(
     food_id: int,
-    food_data: schemas.FoodCreate,
+    food_data: FoodCreateDTO,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -176,7 +176,7 @@ def delete_food(
     
     return {"message": f"'{food.name}' başarıyla silindi"}
 
-@router.get("/my/foods", response_model=List[schemas.FoodOut])
+@router.get("/my/foods", response_model=List[FoodOutDTO])
 def get_my_foods(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)

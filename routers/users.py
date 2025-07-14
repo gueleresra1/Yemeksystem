@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends
-import models, schemas
+import models
+from dtos import UserOutDTO
 import auth
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-@router.get("/me", response_model=schemas.UserOut)
+@router.get("/me", response_model=UserOutDTO)
 def read_users_me(current_user: models.User = Depends(auth.get_current_user)):
     return current_user
 

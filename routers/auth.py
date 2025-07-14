@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-import models, schemas
+import models
+from dtos import UserCreateDTO, UserOutDTO, UserLoginDTO, TokenDTO
 from database import SessionLocal
 from datetime import timedelta
 import auth
@@ -14,8 +15,8 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/register", response_model=schemas.UserOut)
-def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+@router.post("/register", response_model=UserOutDTO)
+def register_user(user: UserCreateDTO, db: Session = Depends(get_db)):
     existing_user = db.query(models.User).filter(
         models.User.email == user.email
     ).first()
@@ -34,8 +35,8 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     
     return new_user
 
-@router.post("/login", response_model=schemas.Token)
-def login_user(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
+@router.post("/login", response_model=TokenDTO)
+def login_user(user_credentials: UserLoginDTO, db: Session = Depends(get_db)):
     user = auth.authenticate_user(db, user_credentials.email, user_credentials.password)
     if not user:
         raise HTTPException(
