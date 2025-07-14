@@ -33,7 +33,7 @@ alembic upgrade +1
 ```
 
 ### 3. Migration'ları Geri Alma
-```bash
+
 # Son migration'ı geri al
 alembic downgrade -1
 
