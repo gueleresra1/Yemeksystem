@@ -7,11 +7,15 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 import models
 from database import SessionLocal
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # JWT yapılandırması
-SECRET_KEY = "your-secret-key-here"  # Prodüksiyonda çevresel değişken olarak saklanmalı
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-here")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
 # Şifre hashleme
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
