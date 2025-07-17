@@ -1,0 +1,49 @@
+{
+  "name": "Lahmacun",
+  "description": "Geleneksel türk pizzası",
+  "price": 25.0,
+  "category": "Ana Yemek",
+  "allergen_ids": [1, 2],
+  "translations": [
+    {
+      "language_id": 1,
+      "name": "Lahmacun",
+      "description": "Geleneksel türk pizzası"
+    },
+    {
+      "language_id": 2,
+      "name": "Turkish Pizza",
+      "description": "Traditional Turkish pizza"
+    }
+  ],
+  "recipes": [
+    {
+      "ingredient_name": "Un",
+      "quantity": "500g",
+      "step_order": 1,
+      "instruction": "Unu eleyip karıştırın",
+      "allergen_ids": [1],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Flour",
+          "instruction": "Sift and mix flour"
+        }
+      ]
+    },
+    {
+      "ingredient_name": "Kıyma",
+      "quantity": "300g",
+      "step_order": 2,
+      "instruction": "Kıymayı baharatlarla karıştırın",
+      "allergen_ids": [],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Minced Meat",
+          "instruction": "Mix minced meat with spices"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "Adana Kebap",
+  "description": "Acılı kıyma kebabı, közde pişirilir",
+  "price": 45.0,
+  "category": "Ana Yemek",
+  "allergen_ids": [1, 2, 3],
+  "translations": [
+    {
+      "language_id": 1,
+      "name": "Adana Kebap",
+      "description": "Acılı kıyma kebabı, közde pişirilir"
+    },
+    {
+      "language_id": 2,
+      "name": "Adana Kebab",
+      "description": "Spicy minced meat kebab, grilled over charcoal"
+    }
+  ],
+  "recipes": [
+    {
+      "ingredient_name": "Kıyma",
+      "quantity": "500g",
+      "step_order": 1,
+      "instruction": "Kıymayı baharatlarla karıştırın",
+      "allergen_ids": [],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Minced Meat",
+          "instruction": "Mix minced meat with spices"
+        }
+      ]
+    },
+    {
+      "ingredient_name": "Kırmızı Biber",
+      "quantity": "2 adet",
+      "step_order": 2,
+      "instruction": "İnce doğrayıp kıyma ile karıştırın",
+      "allergen_ids": [],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Red Pepper",
+          "instruction": "Chop finely and mix with meat"
+        }
+      ]
+    },
+    {
+      "ingredient_name": "Soğan",
+      "quantity": "1 adet",
+      "step_order": 3,
+      "instruction": "Soğanı rendeleyip kıyma ile karıştırın",
+      "allergen_ids": [],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Onion",
+          "instruction": "Grate onion and mix with meat"
+        }
+      ]
+    },
+    {
+      "ingredient_name": "Pide Ekmeği",
+      "quantity": "4 adet",
+      "step_order": 4,
+      "instruction": "Ekmekleri ızgarada hafif ısıtın",
+      "allergen_ids": [1],
+      "translations": [
+        {
+          "language_id": 2,
+          "ingredient_name": "Pita Bread",
+          "instruction": "Warm the bread lightly on grill"
+        }
+      ]
+    }
+  ]
+}
