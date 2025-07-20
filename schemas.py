@@ -48,6 +48,7 @@ class FoodCreate(BaseModel):
     description: Optional[str] = None
     price: float
     category: str
+    tags: Optional[List[str]] = []  # Etiketler listesi
     recipes: List[RecipeCreate]  # Reçete listesi
 
 class FoodOut(BaseModel):
@@ -56,6 +57,7 @@ class FoodOut(BaseModel):
     description: Optional[str] = None
     price: float
     category: str
+    tags: Optional[List[str]] = []  # Etiketler listesi
     dealer_id: int
     is_active: bool
     recipes: List[RecipeOut] = []

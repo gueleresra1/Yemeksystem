@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Float, Boolean, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Text, Float, Boolean, ForeignKey, DateTime, JSON
 from sqlalchemy.orm import relationship
 from .base import Base
 from datetime import datetime 
@@ -11,6 +11,7 @@ class Food(Base):
     description = Column(Text, nullable=True)  # Açıklama
     price = Column(Float, nullable=False)  # Fiyat
     category = Column(String, nullable=False)  # Kategori (Ana Yemek, Çorba, vs.)
+    tags = Column(JSON, nullable=True, default=[])  # Etiketler (JSON array)
     
     
     # Dealer bilgisi ve durum

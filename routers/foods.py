@@ -41,6 +41,7 @@ def create_food(
         description=food_data.description,
         price=food_data.price,
         category=food_data.category,
+        tags=food_data.tags if hasattr(food_data, 'tags') else [],
         dealer_id=current_user.id,
         is_active=True
     )
@@ -114,6 +115,7 @@ def get_foods(
     db: Session = Depends(get_db),
     category: str = None,
     dealer_id: int = None,
+    tags: str = None,
     active_only: bool = True
 ):
     """Tüm yemekleri listele (filtreleme ile)"""
@@ -128,6 +130,13 @@ def get_foods(
     
     if dealer_id:
         query = query.filter(Food.dealer_id == dealer_id)
+    
+    if tags:
+        # Virgülle ayrılmış tagları parse et
+        tag_list = [tag.strip() for tag in tags.split(',')]
+        # JSON array içinde tag arama
+        for tag in tag_list:
+            query = query.filter(Food.tags.contains([tag]))
     
     foods = query.all()
     return foods
@@ -176,6 +185,7 @@ def update_food(
     food.description = food_data.description
     food.price = food_data.price
     food.category = food_data.category
+    food.tags = food_data.tags if hasattr(food_data, 'tags') else []
  
     
     # Eski reçeteleri sil

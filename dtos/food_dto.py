@@ -41,6 +41,7 @@ class FoodCreateDTO(BaseModel):
     description: Optional[str] = "Acılı kıyma kebabı, közde pişirilir"
     price: float = 45.0
     category: str = "Ana Yemek"
+    tags: Optional[List[str]] = ["food", "lara", "turkish"]
     recipes: List[RecipeWithTranslationsCreateDTO] = []
     translations: List[FoodTranslationCreateDTO] = []
     allergen_ids: List[int] = []
@@ -52,6 +53,7 @@ class FoodCreateDTO(BaseModel):
                 "description": "Acılı kıyma kebabı, közde pişirilir",
                 "price": 45.0,
                 "category": "Ana Yemek",
+                "tags": ["food", "lara", "turkish", "spicy"],
                 "allergen_ids": [1, 2],
                 "translations": [
                     {
@@ -134,6 +136,7 @@ class FoodOutDTO(BaseModel):
     description: Optional[str] = None
     price: float
     category: str
+    tags: Optional[List[str]] = []
     dealer_id: int
     is_active: bool
     recipes: List[RecipeOutWithTranslationsDTO] = []
