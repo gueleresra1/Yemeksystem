@@ -15,3 +15,4 @@ class User(Base):
     # Relationship
     role = relationship("Role", back_populates="users")
     foods = relationship("Food", back_populates="dealer") # dealer in yemekleri
+    restaurants = relationship("Restaurant", back_populates="owner") # user'ın restoranları

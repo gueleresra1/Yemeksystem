@@ -11,7 +11,10 @@
       "Bash(mkdir:*)",
       "Bash(ls:*)",
       "Bash(curl:*)",
-      "Bash(docker-compose up:*)"
+      "Bash(docker-compose up:*)",
+      "Bash(uvicorn:*)",
+      "Bash(pkill:*)",
+      "Bash(alembic upgrade:*)"
     ],
     "deny": []
   }

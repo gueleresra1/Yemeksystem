@@ -9,6 +9,7 @@ from .food_translation import FoodTranslation
 from .recipe_translation import RecipeTranslation
 from .allergen_translation import AllergenTranslation
 from .role_translation import RoleTranslation
+from .restaurant import Restaurant, RestaurantCategory, RestaurantSettings, Order
 
 
 __all__ = [
@@ -22,5 +23,9 @@ __all__ = [
     "FoodTranslation",
     "RecipeTranslation",
     "AllergenTranslation", 
-    "RoleTranslation"
+    "RoleTranslation",
+    "Restaurant",
+    "RestaurantCategory", 
+    "RestaurantSettings",
+    "Order"
 ]
